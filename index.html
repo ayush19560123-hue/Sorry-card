@@ -5,31 +5,72 @@
   <style>
     body {
       margin: 0;
+      font-family: 'Segoe UI', cursive;
       background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      text-align: center;
+      color: #333;
+    }
+
+    section {
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      font-family: Arial;
+      flex-direction: column;
+      padding: 20px;
     }
+
+    h1 {
+      color: #e91e63;
+      font-size: 32px;
+    }
+
     .card {
       background: white;
       padding: 25px;
       border-radius: 20px;
-      text-align: center;
-      width: 300px;
+      max-width: 320px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     }
-    h2 { color: #e91e63; }
+
+    .heart {
+      font-size: 40px;
+      animation: beat 1s infinite;
+    }
+
+    @keyframes beat {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
   </style>
 </head>
+
 <body>
+
+<section>
+  <h1>Hey Shreeya ❤️</h1>
+  <p>Scroll down...</p>
+</section>
+
+<section>
+  <div class="heart">❤️</div>
+  <h1>I’m really sorry</h1>
+</section>
+
+<section>
   <div class="card">
-    <h2>Shreeya ❤️</h2>
-    <p>I’m really sorry… I messed up.</p>
+    <p>I messed up… and I regret it.</p>
     <p>Bas ek request hai, mujhe kuch din ka time de do.</p>
-    <p>I’ll prove I can be better.</p>
-    <p><b>Please give me one chance 🙂</b></p>
   </div>
+</section>
+
+<section>
+  <div class="card">
+    <p>I’ll prove I can be better.</p>
+    <h2>Please give me one chance 🙂</h2>
+  </div>
+</section>
+
 </body>
 </html>
