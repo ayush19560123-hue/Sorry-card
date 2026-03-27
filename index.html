@@ -5,36 +5,41 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', cursive;
+      font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      text-align: center;
-      color: #333;
-    }
-
-    section {
-      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
-      padding: 20px;
-    }
-
-    h1 {
-      color: #e91e63;
-      font-size: 32px;
+      height: 100vh;
+      text-align: center;
     }
 
     .card {
       background: white;
-      padding: 25px;
+      padding: 30px;
       border-radius: 20px;
-      max-width: 320px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      width: 320px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      color: #e91e63;
+      min-height: 60px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #e91e63;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
     }
 
     .heart {
-      font-size: 40px;
+      font-size: 30px;
       animation: beat 1s infinite;
     }
 
@@ -43,34 +48,82 @@
       50% { transform: scale(1.2); }
       100% { transform: scale(1); }
     }
+
+    .buttons {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .yes {
+      background: green;
+    }
+
+    .no {
+      background: red;
+      position: relative;
+    }
   </style>
 </head>
 
 <body>
 
-<section>
-  <h1>Hey Shreeya ❤️</h1>
-  <p>Scroll down...</p>
-</section>
-
-<section>
+<div class="card">
   <div class="heart">❤️</div>
-  <h1>I’m really sorry</h1>
-</section>
+  <h2 id="text"></h2>
+  <button onclick="nextStep()" id="btn">Start</button>
 
-<section>
-  <div class="card">
-    <p>I messed up… and I regret it.</p>
-    <p>Bas ek request hai, mujhe kuch din ka time de do.</p>
+  <div class="buttons" id="finalButtons">
+    <button class="yes" onclick="yesClick()">YES 😊</button>
+    <button class="no" onmouseover="moveNo()">NO 😏</button>
   </div>
-</section>
+</div>
 
-<section>
-  <div class="card">
-    <p>I’ll prove I can be better.</p>
-    <h2>Please give me one chance 🙂</h2>
-  </div>
-</section>
+<script>
+const messages = [
+  "Tum kitni cute ho? 😏",
+  "120% Over Cute 😍",
+  "Aur main idiot... jo galti kar di 😔",
+  "I'm really sorry Shreeya ❤️",
+  "Bas ek chance de do... prove karunga 😞",
+  "Please forgive me 🙂❤️"
+];
+
+let index = 0;
+let typingSpeed = 40;
+
+function typeText(text, i = 0) {
+  if (i < text.length) {
+    document.getElementById("text").innerHTML += text.charAt(i);
+    setTimeout(() => typeText(text, i + 1), typingSpeed);
+  }
+}
+
+function nextStep() {
+  const textBox = document.getElementById("text");
+  textBox.innerHTML = "";
+
+  if (index < messages.length) {
+    typeText(messages[index]);
+    index++;
+  } else {
+    document.getElementById("btn").style.display = "none";
+    document.getElementById("finalButtons").style.display = "block";
+    typeText("Ab to maan jao na 😏❤️");
+  }
+}
+
+function moveNo() {
+  const btn = document.querySelector(".no");
+  btn.style.position = "absolute";
+  btn.style.top = Math.random() * 200 + "px";
+  btn.style.left = Math.random() * 200 + "px";
+}
+
+function yesClick() {
+  document.getElementById("text").innerHTML = "Yayyy 😍❤️ I promise I’ll be better!";
+  document.getElementById("finalButtons").style.display = "none";
+}
+</script>
 
 </body>
 </html>
