@@ -1,30 +1,45 @@
-      <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <title>For Shreeya ❤️</title>
 
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      margin: 0;
+      height: 100vh;
       overflow: hidden;
       font-family: 'Segoe UI', sans-serif;
-      background: black;
-      color: white;
+      background: radial-gradient(circle at top, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    .slide {
+    .container {
+      position: relative;
+      width: 90%;
+      max-width: 400px;
+      height: 500px;
+    }
+
+    .card {
       position: absolute;
       width: 100%;
       height: 100%;
+      backdrop-filter: blur(15px);
+      background: rgba(255,255,255,0.2);
+      border-radius: 25px;
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
-      font-size: 28px;
       padding: 20px;
+      font-size: 24px;
+      color: white;
       opacity: 0;
-      transform: scale(1.2);
-      transition: all 0.8s ease;
+      transform: scale(0.8);
+      transition: all 0.7s ease;
     }
 
     .active {
@@ -32,17 +47,11 @@
       transform: scale(1);
     }
 
-    .slide:nth-child(1) { background: linear-gradient(#ff758c, #ff7eb3); }
-    .slide:nth-child(2) { background: linear-gradient(#ff9a9e, #fad0c4); }
-    .slide:nth-child(3) { background: linear-gradient(#fbc2eb, #a6c1ee); }
-    .slide:nth-child(4) { background: linear-gradient(#ffecd2, #fcb69f); }
-    .slide:nth-child(5) { background: linear-gradient(#ff9a9e, #fecfef); }
-    .slide:nth-child(6) { background: linear-gradient(#a18cd1, #fbc2eb); }
-
     .heart {
       position: absolute;
       font-size: 20px;
-      animation: float 5s linear infinite;
+      animation: float 6s linear infinite;
+      color: white;
     }
 
     @keyframes float {
@@ -50,28 +59,39 @@
       100% { transform: translateY(-10vh); opacity: 0; }
     }
 
+    .tap {
+      position: absolute;
+      bottom: 15px;
+      font-size: 12px;
+      opacity: 0.7;
+    }
+
   </style>
 </head>
 
-<body onclick="nextSlide()">
+<body onclick="next()">
 
-<div class="slide active">Hey Shreeya ❤️</div>
-<div class="slide">Tum kitni cute ho pata hai? 😏</div>
-<div class="slide">120% Over Cute 😍</div>
-<div class="slide">But maine galti kar di... 😔</div>
-<div class="slide">I'm really sorry ❤️</div>
-<div class="slide">Bas ek chance de do... please 🥺</div>
+<div class="container">
+
+  <div class="card active">Hey Shreeya ❤️<br><br><small>Tap to continue</small></div>
+  <div class="card">Tum kitni cute ho pata hai? 😏</div>
+  <div class="card">120% Over Cute 😍</div>
+  <div class="card">Aur main idiot… galti kar di 😔</div>
+  <div class="card">I'm really sorry ❤️</div>
+  <div class="card">Bas ek chance de do… prove karunga 🥺</div>
+  <div class="card">Please forgive me 🙂❤️</div>
+
+</div>
 
 <script>
-let slides = document.querySelectorAll(".slide");
-let index = 0;
+let cards = document.querySelectorAll(".card");
+let i = 0;
 
-function nextSlide() {
-  slides[index].classList.remove("active");
-  index++;
-
-  if (index < slides.length) {
-    slides[index].classList.add("active");
+function next() {
+  if (i < cards.length - 1) {
+    cards[i].classList.remove("active");
+    i++;
+    cards[i].classList.add("active");
   }
 }
 
@@ -83,7 +103,7 @@ setInterval(() => {
   heart.style.fontSize = (Math.random() * 20 + 10) + "px";
   document.body.appendChild(heart);
 
-  setTimeout(() => heart.remove(), 5000);
+  setTimeout(() => heart.remove(), 6000);
 }, 300);
 </script>
 
