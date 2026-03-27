@@ -1,128 +1,90 @@
-<!DOCTYPE html>
+      <!DOCTYPE html>
 <html>
 <head>
   <title>For Shreeya ❤️</title>
+
   <style>
     body {
       margin: 0;
+      overflow: hidden;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      background: black;
+      color: white;
+    }
+
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
       text-align: center;
+      font-size: 28px;
+      padding: 20px;
+      opacity: 0;
+      transform: scale(1.2);
+      transition: all 0.8s ease;
     }
 
-    .card {
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
-      width: 320px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    .active {
+      opacity: 1;
+      transform: scale(1);
     }
 
-    h2 {
-      color: #e91e63;
-      min-height: 60px;
-    }
-
-    button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 10px;
-      background: #e91e63;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-    }
+    .slide:nth-child(1) { background: linear-gradient(#ff758c, #ff7eb3); }
+    .slide:nth-child(2) { background: linear-gradient(#ff9a9e, #fad0c4); }
+    .slide:nth-child(3) { background: linear-gradient(#fbc2eb, #a6c1ee); }
+    .slide:nth-child(4) { background: linear-gradient(#ffecd2, #fcb69f); }
+    .slide:nth-child(5) { background: linear-gradient(#ff9a9e, #fecfef); }
+    .slide:nth-child(6) { background: linear-gradient(#a18cd1, #fbc2eb); }
 
     .heart {
-      font-size: 30px;
-      animation: beat 1s infinite;
+      position: absolute;
+      font-size: 20px;
+      animation: float 5s linear infinite;
     }
 
-    @keyframes beat {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
+    @keyframes float {
+      0% { transform: translateY(100vh); opacity: 1; }
+      100% { transform: translateY(-10vh); opacity: 0; }
     }
 
-    .buttons {
-      display: none;
-      margin-top: 20px;
-    }
-
-    .yes {
-      background: green;
-    }
-
-    .no {
-      background: red;
-      position: relative;
-    }
   </style>
 </head>
 
-<body>
+<body onclick="nextSlide()">
 
-<div class="card">
-  <div class="heart">❤️</div>
-  <h2 id="text"></h2>
-  <button onclick="nextStep()" id="btn">Start</button>
-
-  <div class="buttons" id="finalButtons">
-    <button class="yes" onclick="yesClick()">YES 😊</button>
-    <button class="no" onmouseover="moveNo()">NO 😏</button>
-  </div>
-</div>
+<div class="slide active">Hey Shreeya ❤️</div>
+<div class="slide">Tum kitni cute ho pata hai? 😏</div>
+<div class="slide">120% Over Cute 😍</div>
+<div class="slide">But maine galti kar di... 😔</div>
+<div class="slide">I'm really sorry ❤️</div>
+<div class="slide">Bas ek chance de do... please 🥺</div>
 
 <script>
-const messages = [
-  "Tum kitni cute ho? 😏",
-  "120% Over Cute 😍",
-  "Aur main idiot... jo galti kar di 😔",
-  "I'm really sorry Shreeya ❤️",
-  "Bas ek chance de do... prove karunga 😞",
-  "Please forgive me 🙂❤️"
-];
-
+let slides = document.querySelectorAll(".slide");
 let index = 0;
-let typingSpeed = 40;
 
-function typeText(text, i = 0) {
-  if (i < text.length) {
-    document.getElementById("text").innerHTML += text.charAt(i);
-    setTimeout(() => typeText(text, i + 1), typingSpeed);
+function nextSlide() {
+  slides[index].classList.remove("active");
+  index++;
+
+  if (index < slides.length) {
+    slides[index].classList.add("active");
   }
 }
 
-function nextStep() {
-  const textBox = document.getElementById("text");
-  textBox.innerHTML = "";
+setInterval(() => {
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+  document.body.appendChild(heart);
 
-  if (index < messages.length) {
-    typeText(messages[index]);
-    index++;
-  } else {
-    document.getElementById("btn").style.display = "none";
-    document.getElementById("finalButtons").style.display = "block";
-    typeText("Ab to maan jao na 😏❤️");
-  }
-}
-
-function moveNo() {
-  const btn = document.querySelector(".no");
-  btn.style.position = "absolute";
-  btn.style.top = Math.random() * 200 + "px";
-  btn.style.left = Math.random() * 200 + "px";
-}
-
-function yesClick() {
-  document.getElementById("text").innerHTML = "Yayyy 😍❤️ I promise I’ll be better!";
-  document.getElementById("finalButtons").style.display = "none";
-}
+  setTimeout(() => heart.remove(), 5000);
+}, 300);
 </script>
 
 </body>
